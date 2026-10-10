@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Target, Search, Video, Briefcase, Map, Sparkles, Film, Layout, BarChart, Settings, Mail, MessageCircle } from "lucide-react";
 import { services, servicesByCategory } from "@/data/services";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
-export const metadata: Metadata = {
-  title: "Services — PerformX",
-  description: "Complete performance marketing services: Meta Ads, Google Ads, TikTok, LinkedIn, Performance Creative, CRO, Landing Pages, Tracking, CRM & Automation.",
-  alternates: { canonical: "https://performx.agency/services" },
-};
 
 const iconMap: Record<string, React.ElementType> = {
   target: Target, search: Search, video: Video, briefcase: Briefcase, map: Map,
@@ -99,3 +95,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+

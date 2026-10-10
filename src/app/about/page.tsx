@@ -1,14 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
-export const metadata: Metadata = {
-  title: "About PerformX — Performance Marketing Agency",
-  description: "PerformX is a performance marketing and customer acquisition agency. We build complete acquisition systems — creative, paid media, conversion, data, and automation.",
-  alternates: { canonical: "https://performx.agency/about" },
-};
 
 const stats = [
   { v: "5+",     l: "Years in performance marketing" },
@@ -107,3 +103,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

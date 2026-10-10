@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Settings, MessageCircle, Mail, Zap } from "lucide-react";
 import { GradientText } from "@/components/ui/GradientText";
@@ -7,11 +8,6 @@ import { Badge } from "@/components/ui/Badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
-export const metadata: Metadata = {
-  title: "CRM & Marketing Automation — PerformX",
-  description: "CRM setup, lead nurturing workflows, WhatsApp automation, and email sequences that turn leads into customers without manual effort.",
-  alternates: { canonical: "https://performx.agency/crm-automation" },
-};
 
 const automations = [
   { icon: Settings, title: "CRM Setup & Configuration", desc: "HubSpot, Pipedrive, GoHighLevel, or Zoho — configured around your sales process with custom pipelines and lead scoring.", color: "#7415FD" },

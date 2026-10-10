@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Layout, TrendingUp, MousePointerClick, BarChart3 } from "lucide-react";
 import { GradientText } from "@/components/ui/GradientText";
@@ -7,11 +8,6 @@ import { Badge } from "@/components/ui/Badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
-export const metadata: Metadata = {
-  title: "CRO & Landing Pages — PerformX",
-  description: "Conversion-optimised landing pages and systematic CRO. Turn your ad traffic into revenue — not bounce rates.",
-  alternates: { canonical: "https://performx.agency/cro-landing-pages" },
-};
 
 const stats = [
   { value: "0.5–2%", label: "Homepage conversion rate (typical)" },
@@ -107,3 +103,4 @@ export default function CROPage() {
     </div>
   );
 }
+

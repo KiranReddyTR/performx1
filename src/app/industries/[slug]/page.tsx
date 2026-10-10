@@ -4,18 +4,18 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react";
 import { industries } from "@/data/industries";
 import { caseStudies } from "@/data/case-studies";
-import { Button } from "@/components/ui/Button";
-import { GradientText } from "@/components/ui/GradientText";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { FinalCTA } from "@/components/sections/FinalCTA";
 
 interface Props { params: { slug: string } }
 
 export async function generateStaticParams() {
-  return industries.map((i) => ({ slug: i.slug }));
+  return industries.map(i => ({ slug: i.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const ind = industries.find((i) => i.slug === params.slug);
-  if (!ind) return { title: "Industry Not Found" };
+  const ind = industries.find(i => i.slug === params.slug);
+  if (!ind) return { title: "Not Found" };
   return {
     title: `${ind.title} Performance Marketing — PerformX`,
     description: ind.description,
@@ -24,111 +24,128 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function IndustryPage({ params }: Props) {
-  const industry = industries.find((i) => i.slug === params.slug);
+  const industry = industries.find(i => i.slug === params.slug);
   if (!industry) notFound();
 
-  const relatedCS = caseStudies.filter((cs) =>
-    cs.industry.toLowerCase().includes(industry.title.toLowerCase().split(" ")[0].toLowerCase()) ||
-    industry.title.toLowerCase().includes(cs.industry.toLowerCase().split(" ")[0].toLowerCase())
+  const related = caseStudies.filter(cs =>
+    cs.industry.toLowerCase().includes(industry.title.toLowerCase().split(" ")[0]) ||
+    industry.title.toLowerCase().includes(cs.industry.toLowerCase().split(" ")[0])
   ).slice(0, 3);
 
+  const colors = { "E-commerce & D2C":"#7415FD","Real Estate":"#A838FD","Education":"#3D5BFD","Healthcare & Wellness":"#0A94FD","Automobile & Dealerships":"#36C2FE","Travel, Events & Hospitality":"#7415FD","Jewellery, Furniture & Retail":"#A838FD" } as Record<string,string>;
+  const color = colors[industry.title] ?? "#7415FD";
+
   return (
-    <div className="min-h-screen pt-28 pb-24">
-      <div className="section-container">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-10">
-          <ol className="flex items-center gap-2 text-sm text-white/30">
-            <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-            <li aria-hidden="true">/</li>
-            <li><Link href="/industries" className="hover:text-white transition-colors">Industries</Link></li>
-            <li aria-hidden="true">/</li>
-            <li className="text-white/60">{industry.title}</li>
-          </ol>
-        </nav>
-
-        <div className="grid lg:grid-cols-[1fr_320px] gap-12">
-          <div>
-            <p className="text-xs font-semibold text-brand-violet uppercase tracking-widest mb-4">Industry</p>
-            <h1 className="text-display-md font-bold text-white mb-6">
+    <div className="min-h-screen">
+      <section className="pt-32 pb-20 relative overflow-hidden">
+        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 80% 50% at 50% -10%, ${color}20 0%, transparent 70%)` }} aria-hidden="true" />
+        <div className="section-container relative z-10">
+          <ScrollReveal className="max-w-3xl">
+            <nav aria-label="Breadcrumb" className="mb-8">
+              <ol className="flex items-center gap-2 text-xs text-white/25">
+                <li><Link href="/" className="hover:text-white/50 transition-colors">Home</Link></li>
+                <li aria-hidden="true">/</li>
+                <li><Link href="/industries" className="hover:text-white/50 transition-colors">Industries</Link></li>
+                <li aria-hidden="true">/</li>
+                <li className="text-white/45">{industry.title}</li>
+              </ol>
+            </nav>
+            <span className="inline-flex text-xs font-bold px-3 py-1.5 rounded-full mb-6" style={{ background:`${color}15`, color, border:`1px solid ${color}25` }}>Industry</span>
+            <h1 className="font-bold text-white mb-6 leading-tight tracking-tight" style={{ fontSize: "clamp(2.25rem,5vw,4rem)" }}>
               Performance marketing for{" "}
-              <GradientText>{industry.title}.</GradientText>
+              <span style={{ background:`linear-gradient(90deg,${color},#36C2FE)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                {industry.title}.
+              </span>
             </h1>
-            <p className="text-xl text-white/60 leading-relaxed mb-12">{industry.description}</p>
+            <p className="text-lg text-white/40 leading-relaxed">{industry.description}</p>
+          </ScrollReveal>
+        </div>
+      </section>
 
+      <div className="section-container pb-20">
+        <div className="grid lg:grid-cols-[1fr_320px] gap-16">
+          <div>
             {/* Challenges */}
-            <section className="mb-10" aria-labelledby="challenges-heading">
-              <h2 id="challenges-heading" className="text-lg font-bold text-white mb-6 flex items-center gap-3">
+            <ScrollReveal className="mb-12">
+              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                 <AlertTriangle size={18} className="text-red-400" aria-hidden="true" />
-                Common Challenges in {industry.title}
+                Common challenges in {industry.title}
               </h2>
               <div className="space-y-3">
                 {industry.challenges.map((c, i) => (
-                  <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-red-500/10 bg-red-500/5">
-                    <span className="text-xs font-bold text-red-400 mt-0.5 flex-shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                    <p className="text-sm text-white/60">{c}</p>
+                  <div key={i} className="flex items-start gap-4 p-5 rounded-2xl"
+                    style={{ background:"rgba(239,68,68,0.05)", border:"1px solid rgba(239,68,68,0.12)" }}>
+                    <span className="text-xs font-bold text-red-400/60 mt-0.5 flex-shrink-0">{String(i+1).padStart(2,"0")}</span>
+                    <p className="text-sm text-white/55 leading-relaxed">{c}</p>
                   </div>
                 ))}
               </div>
-            </section>
+            </ScrollReveal>
 
             {/* Solutions */}
-            <section className="mb-12" aria-labelledby="solutions-heading">
-              <h2 id="solutions-heading" className="text-lg font-bold text-white mb-6 flex items-center gap-3">
-                <CheckCircle2 size={18} className="text-brand-cyan" aria-hidden="true" />
-                How PerformX Solves These
+            <ScrollReveal className="mb-12">
+              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                <CheckCircle2 size={18} style={{ color:"#36C2FE" }} aria-hidden="true" />
+                How PerformX solves these
               </h2>
               <div className="space-y-3">
                 {industry.solutions.map((s, i) => (
-                  <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-brand-azure/15 bg-brand-azure/5">
-                    <CheckCircle2 size={16} className="text-brand-azure mt-0.5 flex-shrink-0" aria-hidden="true" />
-                    <p className="text-sm text-white/70">{s}</p>
+                  <div key={i} className="flex items-start gap-4 p-5 rounded-2xl"
+                    style={{ background:`${color}06`, border:`1px solid ${color}18` }}>
+                    <CheckCircle2 size={15} style={{ color }} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
+                    <p className="text-sm text-white/65 leading-relaxed">{s}</p>
                   </div>
                 ))}
               </div>
-            </section>
+            </ScrollReveal>
 
             {/* Related case studies */}
-            {relatedCS.length > 0 && (
-              <section aria-labelledby="industry-cs-heading">
-                <h2 id="industry-cs-heading" className="text-lg font-bold text-white mb-6">
-                  {industry.title} Case Studies
-                </h2>
+            {related.length > 0 && (
+              <ScrollReveal>
+                <h2 className="text-xl font-bold text-white mb-6">{industry.title} case studies</h2>
                 <div className="space-y-4">
-                  {relatedCS.map((cs) => (
+                  {related.map(cs => (
                     <Link key={cs.id} href={`/case-studies/${cs.slug}`}
-                      className="card-dark p-6 flex items-center gap-6 group hover:border-white/15 transition-all duration-300">
+                      className="flex items-center gap-6 p-6 rounded-2xl group transition-all duration-300 hover:-translate-y-0.5"
+                      style={{ background:"#0C0C10", border:"1px solid rgba(255,255,255,0.06)" }}
+                      onMouseEnter={(e)=>{ (e.currentTarget as HTMLElement).style.borderColor=`${cs.imageColor}25`; }}
+                      onMouseLeave={(e)=>{ (e.currentTarget as HTMLElement).style.borderColor="rgba(255,255,255,0.06)"; }}
+                    >
                       <div className="flex-1">
-                        <p className="text-xs text-white/30 uppercase tracking-widest mb-1">{cs.client}</p>
-                        <p className="text-sm font-semibold text-white line-clamp-1">{cs.results.split(".")[0]}.</p>
+                        <p className="text-xs font-bold uppercase tracking-wide text-white/25 mb-1">{cs.client}</p>
+                        <p className="text-sm font-semibold text-white">{cs.results.split(".")[0]}.</p>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-white/30 group-hover:text-brand-azure transition-colors flex-shrink-0">
-                        View case study
-                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                      </div>
+                      {cs.metrics.filter(m=>m.verified && m.label!=="Channel")[0] && (
+                        <div className="text-xl font-bold flex-shrink-0"
+                          style={{ background:`linear-gradient(90deg,${cs.imageColor},#36C2FE)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                          {cs.metrics.filter(m=>m.verified && m.label!=="Channel")[0].value}
+                        </div>
+                      )}
+                      <ArrowRight size={15} className="text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all flex-shrink-0" aria-hidden="true" />
                     </Link>
                   ))}
                 </div>
-              </section>
+              </ScrollReveal>
             )}
           </div>
 
           {/* Sidebar */}
-          <aside className="space-y-6 lg:sticky lg:top-32 self-start">
-            <div className="card-dark p-6">
-              <p className="text-sm font-semibold text-white mb-2">Ready to scale in {industry.title.split(" ")[0]}?</p>
-              <p className="text-sm text-white/40 mb-6 leading-relaxed">Get a free audit and see what a full acquisition system could do for your business.</p>
+          <aside className="space-y-5 lg:sticky lg:top-32 self-start">
+            <div className="p-6 rounded-2xl" style={{ background:`${color}06`, border:`1px solid ${color}18` }}>
+              <p className="text-sm font-bold text-white mb-2">Ready to scale in {industry.title.split(" ")[0]}?</p>
+              <p className="text-xs text-white/35 mb-6 leading-relaxed">Get a free audit and see what a full acquisition system could do for your business.</p>
               <div className="space-y-3">
-                <Button variant="primary" size="md" href="/free-growth-audit" fullWidth>Get Free Growth Audit</Button>
-                <Button variant="secondary" size="md" href="/book-a-call" fullWidth>Book a Discovery Call</Button>
+                <Link href="/free-growth-audit" className="flex items-center justify-center w-full py-3.5 rounded-xl text-white font-bold text-sm"
+                  style={{ background:`linear-gradient(135deg,${color},#A838FD,#3D5BFD)` }}>Get Free Growth Audit</Link>
+                <Link href="/book-a-call" className="flex items-center justify-center w-full py-3.5 rounded-xl text-white/70 font-semibold text-sm border border-white/10 hover:border-white/20 hover:text-white transition-all">Book a Discovery Call</Link>
               </div>
             </div>
-            <div className="card-dark p-6">
-              <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-4">Other Industries</p>
-              <div className="space-y-2">
-                {industries.filter((i) => i.id !== industry.id).slice(0, 5).map((i) => (
-                  <Link key={i.id} href={`/industries/${i.slug}`}
-                    className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors py-1.5 group">
-                    <ArrowRight size={12} style={{ color: "#7415FD" }} aria-hidden="true" />
+            <div className="p-6 rounded-2xl" style={{ background:"#0C0C10", border:"1px solid rgba(255,255,255,0.06)" }}>
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-white/25 mb-4">Other industries</p>
+              <div className="space-y-1">
+                {industries.filter(i=>i.id!==industry.id).slice(0,5).map(i=>(
+                  <Link key={i.id} href={`/industries/${i.slug}`} className="flex items-center gap-2 py-2.5 text-sm text-white/40 hover:text-white transition-colors group">
+                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-brand-violet transition-colors" aria-hidden="true" />
                     {i.title}
                   </Link>
                 ))}
@@ -137,6 +154,7 @@ export default function IndustryPage({ params }: Props) {
           </aside>
         </div>
       </div>
+      <FinalCTA />
     </div>
   );
 }

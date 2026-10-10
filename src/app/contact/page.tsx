@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Mail, Phone } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-
-export const metadata: Metadata = {
-  title: "Contact — PerformX",
-  description: "Get in touch with the PerformX team. Email, phone, WhatsApp, or contact form.",
-};
 
 const contacts = [
   { icon: Mail,  color: "#7415FD", label: "Email",             val: "rishigoswami2234@gmail.com",  href: "mailto:rishigoswami2234@gmail.com" },
@@ -81,3 +77,4 @@ export default function ContactPage() {
     </div>
   );
 }
+
