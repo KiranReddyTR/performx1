@@ -18,9 +18,7 @@ export function IndustriesGrid() {
             <p className="tag mb-6">Industries</p>
             <h2 id="industries-heading" className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
               Deep expertise across{" "}
-              <span style={{ background: "linear-gradient(90deg,#7415FD,#36C2FE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                20+ industries.
-              </span>
+              <span className="bg-brand-gradient bg-clip-text text-transparent">20+ industries.</span>
             </h2>
           </div>
           <Link href="/industries" className="flex items-center gap-2 text-sm font-semibold text-white/35 hover:text-white transition-colors group whitespace-nowrap">
@@ -34,12 +32,8 @@ export function IndustriesGrid() {
             const c = colors[i % colors.length];
             return (
               <Link key={ind.id} href={`/industries/${ind.slug}`}
-                className="group p-7 rounded-2xl flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1.5"
-                style={{ background: "#0C0C10", border: "1px solid rgba(255,255,255,0.06)" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = `${c}25`; (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 40px ${c}10`; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-              >
-                <div className="w-13 h-13 w-12 h-12 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                className="group p-7 rounded-2xl flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg card-dark">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                   style={{ background: `${c}12`, border: `1.5px solid ${c}28` }}>
                   <Icon size={22} style={{ color: c }} aria-hidden="true" />
                 </div>

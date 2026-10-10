@@ -1,11 +1,15 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ShoppingBag, Building2, GraduationCap, HeartPulse, Car, MapPin, Gem } from "lucide-react";
 import { industries } from "@/data/industries";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
+export const metadata: Metadata = {
+  title: "Industries — PerformX",
+  description: "Performance marketing expertise across e-commerce, real estate, education, healthcare, automobile, travel, jewellery and retail.",
+  alternates: { canonical: "https://performx.agency/industries" },
+};
 
 const iconMap: Record<string, React.ElementType> = {
   "shopping-bag": ShoppingBag, "building-2": Building2, "graduation-cap": GraduationCap,
@@ -23,11 +27,9 @@ export default function IndustriesPage() {
             <p className="tag mb-8">Industries</p>
             <h1 className="font-bold text-white mb-6 leading-tight tracking-tight" style={{ fontSize: "clamp(2.5rem,6vw,5rem)" }}>
               Deep expertise across{" "}
-              <span style={{ background: "linear-gradient(90deg,#7415FD,#A838FD,#36C2FE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                20+ industries.
-              </span>
+              <span className="bg-brand-gradient bg-clip-text text-transparent">20+ industries.</span>
             </h1>
-            <p className="text-lg text-white/40 leading-relaxed">Industry context matters in performance marketing. Knowing compliance requirements, buying cycles, and audience psychology of your sector produces better results than generic campaigns.</p>
+            <p className="text-lg text-white/40 leading-relaxed">Industry context matters in performance marketing. Knowing your sector&apos;s compliance, buying cycles, and audience psychology produces better results than generic campaigns.</p>
           </ScrollReveal>
         </div>
       </section>
@@ -39,11 +41,7 @@ export default function IndustriesPage() {
             const c = colors[i % colors.length];
             return (
               <Link key={ind.id} href={`/industries/${ind.slug}`}
-                className="group p-8 rounded-2xl flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1.5"
-                style={{ background: "#0C0C10", border: "1px solid rgba(255,255,255,0.06)" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = `${c}28`; (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 40px ${c}10`; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-              >
+                className="group p-8 rounded-2xl flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1.5 card-dark">
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                   style={{ background: `${c}12`, border: `1.5px solid ${c}28` }}>
                   <Icon size={26} style={{ color: c }} aria-hidden="true" />
@@ -62,11 +60,9 @@ export default function IndustriesPage() {
 
         <div className="p-10 rounded-2xl text-center" style={{ background: "rgba(116,21,253,0.04)", border: "1px solid rgba(116,21,253,0.14)" }}>
           <h2 className="text-xl font-bold text-white mb-3">Don&apos;t see your industry?</h2>
-          <p className="text-white/40 mb-6 max-w-md mx-auto text-sm">We&apos;ve worked across 20+ industries. If yours isn&apos;t listed, get in touch — acquisition principles translate across most B2C and high-ticket B2B verticals.</p>
+          <p className="text-white/40 mb-6 max-w-md mx-auto text-sm">We&apos;ve worked across 20+ industries. Acquisition principles translate across most B2C and high-ticket B2B verticals.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-white font-bold text-sm"
-            style={{ background: "linear-gradient(135deg,#7415FD,#A838FD,#3D5BFD)" }}>
-            Get in Touch
-          </Link>
+            style={{ background: "linear-gradient(135deg,#7415FD,#A838FD,#3D5BFD)" }}>Get in Touch</Link>
         </div>
       </div>
       <FinalCTA />

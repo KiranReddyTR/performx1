@@ -9,12 +9,12 @@ const iconMap: Record<string, React.ElementType> = {
   sparkles: Sparkles, film: Film, layout: Layout, "bar-chart": BarChart,
   settings: Settings, mail: Mail, "message-circle": MessageCircle,
 };
-const catConfig: Record<string, { color: string; label: string }> = {
-  "Paid Media":  { color: "#7415FD", label: "Paid Media" },
-  "Creative":    { color: "#A838FD", label: "Creative" },
-  "Conversion":  { color: "#3D5BFD", label: "Conversion" },
-  "Data":        { color: "#0A94FD", label: "Data" },
-  "Automation":  { color: "#36C2FE", label: "Automation" },
+const catCfg: Record<string, { color: string; bg: string; border: string }> = {
+  "Paid Media":  { color: "#7415FD", bg: "rgba(116,21,253,0.08)", border: "rgba(116,21,253,0.2)" },
+  "Creative":    { color: "#A838FD", bg: "rgba(168,56,253,0.08)", border: "rgba(168,56,253,0.2)" },
+  "Conversion":  { color: "#3D5BFD", bg: "rgba(61,91,253,0.08)",  border: "rgba(61,91,253,0.2)"  },
+  "Data":        { color: "#0A94FD", bg: "rgba(10,148,253,0.08)", border: "rgba(10,148,253,0.2)" },
+  "Automation":  { color: "#36C2FE", bg: "rgba(54,194,254,0.08)", border: "rgba(54,194,254,0.2)" },
 };
 
 export function ServicesGrid() {
@@ -26,9 +26,7 @@ export function ServicesGrid() {
             <p className="tag mb-6">What we do</p>
             <h2 id="services-heading" className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
               Every capability your acquisition{" "}
-              <span style={{ background: "linear-gradient(90deg,#7415FD,#36C2FE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                system needs.
-              </span>
+              <span className="bg-brand-gradient bg-clip-text text-transparent">system needs.</span>
             </h2>
           </div>
           <Link href="/services" className="flex items-center gap-2 text-sm font-semibold text-white/35 hover:text-white transition-colors group whitespace-nowrap">
@@ -38,13 +36,11 @@ export function ServicesGrid() {
 
         <div className="space-y-14">
           {Object.entries(servicesByCategory).map(([cat, svcs]) => {
-            const cfg = catConfig[cat] ?? { color: "#7415FD", label: cat };
+            const cfg = catCfg[cat] ?? catCfg["Paid Media"];
             return (
               <div key={cat}>
                 <div className="flex items-center gap-4 mb-6">
-                  <span className="text-xs font-bold px-3 py-1.5 rounded-full" style={{ background: `${cfg.color}12`, color: cfg.color, border: `1px solid ${cfg.color}25` }}>
-                    {cfg.label}
-                  </span>
+                  <span className="text-xs font-bold px-3 py-1.5 rounded-full" style={{ background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.border}` }}>{cat}</span>
                   <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.05)" }} aria-hidden="true" />
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" data-stagger="50">
@@ -52,13 +48,9 @@ export function ServicesGrid() {
                     const Icon = iconMap[service.icon] ?? Target;
                     return (
                       <Link key={service.id} href={`/services/${service.slug}`}
-                        className="group p-6 rounded-2xl flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1"
-                        style={{ background: "#0C0C10", border: "1px solid rgba(255,255,255,0.06)" }}
-                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = `${cfg.color}25`; (e.currentTarget as HTMLElement).style.boxShadow = `0 6px 30px ${cfg.color}10`; }}
-                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-                      >
+                        className="group p-6 rounded-2xl flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 card-dark">
                         <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                          style={{ background: `${cfg.color}12`, border: `1.5px solid ${cfg.color}28` }}>
+                          style={{ background: cfg.bg, border: `1.5px solid ${cfg.border}` }}>
                           <Icon size={20} style={{ color: cfg.color }} aria-hidden="true" />
                         </div>
                         <div className="flex-1">

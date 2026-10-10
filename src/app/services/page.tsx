@@ -1,11 +1,15 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Target, Search, Video, Briefcase, Map, Sparkles, Film, Layout, BarChart, Settings, Mail, MessageCircle } from "lucide-react";
 import { services, servicesByCategory } from "@/data/services";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
+export const metadata: Metadata = {
+  title: "Services — PerformX",
+  description: "Complete performance marketing services: Meta Ads, Google Ads, TikTok, LinkedIn, Performance Creative, CRO, Landing Pages, Tracking, CRM & Automation.",
+  alternates: { canonical: "https://performx.agency/services" },
+};
 
 const iconMap: Record<string, React.ElementType> = {
   target: Target, search: Search, video: Video, briefcase: Briefcase, map: Map,
@@ -27,12 +31,10 @@ export default function ServicesPage() {
             <p className="tag mb-8">What we do</p>
             <h1 className="font-bold text-white mb-6 leading-tight tracking-tight" style={{ fontSize: "clamp(2.5rem,6vw,5rem)" }}>
               Every capability your acquisition{" "}
-              <span style={{ background: "linear-gradient(90deg,#7415FD,#A838FD,#36C2FE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                system needs.
-              </span>
+              <span className="bg-brand-gradient bg-clip-text text-transparent">system needs.</span>
             </h1>
             <p className="text-lg text-white/40 leading-relaxed">
-              12 integrated services across paid media, creative, conversion, data, and automation — each designed to work as part of a complete system.
+              12 integrated services across paid media, creative, conversion, data, and automation.
             </p>
           </ScrollReveal>
         </div>
@@ -52,11 +54,7 @@ export default function ServicesPage() {
                   const Icon = iconMap[s.icon] ?? Target;
                   return (
                     <Link key={s.id} href={`/services/${s.slug}`}
-                      className="group p-8 rounded-2xl flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1.5"
-                      style={{ background: "#0C0C10", border: "1px solid rgba(255,255,255,0.06)" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = `${color}25`; (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 40px ${color}10`; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-                    >
+                      className="group p-8 rounded-2xl flex flex-col gap-6 transition-all duration-300 hover:-translate-y-1.5 card-dark">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                         style={{ background: `${color}12`, border: `1.5px solid ${color}28` }}>
                         <Icon size={22} style={{ color }} aria-hidden="true" />
@@ -76,23 +74,15 @@ export default function ServicesPage() {
           );
         })}
 
-        {/* Bottom CTA */}
         <div className="p-12 rounded-2xl text-center" style={{ background: "rgba(116,21,253,0.05)", border: "1px solid rgba(116,21,253,0.15)" }}>
           <h2 className="text-2xl font-bold text-white mb-4">Not sure which services you need?</h2>
-          <p className="text-white/40 mb-8 max-w-lg mx-auto">Start with a free Growth Audit. We&apos;ll assess your current setup and recommend exactly what your acquisition system needs.</p>
+          <p className="text-white/40 mb-8 max-w-lg mx-auto">Start with a free Growth Audit. We&apos;ll recommend exactly what your acquisition system needs.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/free-growth-audit"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-white font-bold text-sm transition-all duration-300 hover:scale-[1.03]"
-              style={{ background: "linear-gradient(135deg,#7415FD,#A838FD,#3D5BFD)" }}>
-              Get Free Growth Audit
-            </Link>
-            <Link href="/book-a-call" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-white/70 font-semibold text-sm border border-white/10 hover:border-white/20 hover:text-white transition-all">
-              Book a Discovery Call
-            </Link>
+            <Link href="/free-growth-audit" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-white font-bold text-sm" style={{ background: "linear-gradient(135deg,#7415FD,#A838FD,#3D5BFD)" }}>Get Free Growth Audit</Link>
+            <Link href="/book-a-call" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-white/70 font-semibold text-sm border border-white/10 hover:border-white/20 hover:text-white transition-all">Book a Discovery Call</Link>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
