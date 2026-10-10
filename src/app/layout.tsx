@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@/components/Analytics";
+import { AnimationProvider } from "@/components/motion/AnimationProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
@@ -71,6 +73,39 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "PerformX",
+              "description": "Performance marketing and customer acquisition agency. We build profitable customer acquisition systems — Meta Ads, Google Ads, Performance Creative, CRO, CRM & Automation.",
+              "url": "https://performx.agency",
+              "logo": "https://performx.agency/icons/logo.svg",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-88396-85579",
+                "contactType": "customer service",
+                "email": "rishigoswami2234@gmail.com",
+                "availableLanguage": "English"
+              },
+              "sameAs": [
+                "https://instagram.com/performex.agency"
+              ],
+              "areaServed": ["IN", "AE", "US", "GB"],
+              "serviceType": [
+                "Performance Marketing",
+                "Customer Acquisition",
+                "Meta Ads",
+                "Google Ads",
+                "Conversion Rate Optimisation",
+                "CRM Automation"
+              ],
+              "slogan": "Performance That Scales"
+            })
+          }}
+        />
       </head>
       <body className="bg-brand-black text-white antialiased">
         <a
@@ -79,9 +114,12 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <Analytics />
         <Header />
         <main id="main-content" tabIndex={-1}>
-          {children}
+          <AnimationProvider>
+            {children}
+          </AnimationProvider>
         </main>
         <Footer />
 

@@ -58,9 +58,13 @@ export function GrowthAuditForm() {
     if (!data.consent) { setError("Please confirm your consent to proceed."); return; }
     setLoading(true);
     try {
-      // Integration adapter — awaiting form endpoint configuration
-      // Replace with: await fetch("/api/growth-audit", { method: "POST", body: JSON.stringify(data) })
-      await new Promise((r) => setTimeout(r, 800)); // Simulate submission
+      const res = await fetch("/api/growth-audit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "Submission failed");
       router.push("/thank-you?type=audit");
     } catch {
       setError("Something went wrong. Please try again or email us directly at rishigoswami2234@gmail.com");

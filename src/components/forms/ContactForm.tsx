@@ -18,8 +18,13 @@ export function ContactForm() {
     if (!data.consent) { setError("Please confirm your consent to continue."); return; }
     setLoading(true);
     try {
-      // Integration adapter — awaiting form endpoint configuration
-      await new Promise((r) => setTimeout(r, 700));
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "Submission failed");
       router.push("/thank-you?type=contact");
     } catch {
       setError("Something went wrong. Please email us directly at rishigoswami2234@gmail.com");

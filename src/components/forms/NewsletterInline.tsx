@@ -5,17 +5,27 @@ import { Button } from "@/components/ui/Button";
 
 export function NewsletterInline() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    // Integration adapter — awaiting email provider configuration
-    setSubmitted(true);
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
   };
 
-  if (submitted) {
-    return <p className="text-brand-cyan text-sm font-medium">You're on the list. We'll be in touch.</p>;
+  if (status === "done") {
+    return <p className="text-brand-cyan text-sm font-medium py-3">You&apos;re on the list. We&apos;ll be in touch.</p>;
   }
 
   return (
@@ -28,9 +38,17 @@ export function NewsletterInline() {
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-violet/60 transition-colors"
+        className="flex-1 bg-white/5 border border-white/10 text-white placeholder:text-white/25 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-violet/60 focus:ring-1 focus:ring-brand-violet/30 transition-colors"
+        aria-describedby={status === "error" ? "newsletter-error" : undefined}
       />
-      <Button type="submit" variant="primary" size="md">Notify me</Button>
+      <Button type="submit" variant="primary" size="md" loading={status === "loading"}>
+        Subscribe
+      </Button>
+      {status === "error" && (
+        <p id="newsletter-error" className="text-xs text-red-400 mt-1 sm:col-span-2" role="alert">
+          Something went wrong. Please try again.
+        </p>
+      )}
     </form>
   );
 }

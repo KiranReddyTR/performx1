@@ -1,0 +1,63 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#010002"/>
+  <!-- Grid -->
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="grad" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7415FD"/>
+      <stop offset="25%" stop-color="#A838FD"/>
+      <stop offset="60%" stop-color="#3D5BFD"/>
+      <stop offset="80%" stop-color="#0A94FD"/>
+      <stop offset="100%" stop-color="#36C2FE"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#7415FD" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#010002" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- Gradient accent bar -->
+  <rect x="80" y="80" width="240" height="4" rx="2" fill="url(#grad)"/>
+  <!-- PX Icon -->
+  <g transform="translate(80, 130)">
+    <!-- P -->
+    <path d="M0 0h28a20 20 0 0 1 0 40H0V0z" fill="none" stroke="url(#grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="0" y1="40" x2="0" y2="68" stroke="url(#grad)" stroke-width="4" stroke-linecap="round"/>
+    <!-- X -->
+    <line x1="52" y1="0" x2="88" y2="48" stroke="url(#grad)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="88" y1="0" x2="52" y2="48" stroke="url(#grad)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="46" y1="54" x2="60" y2="68" stroke="url(#grad)" stroke-width="4" stroke-linecap="round"/>
+    <line x1="74" y1="54" x2="60" y2="68" stroke="url(#grad)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="80" y="290" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="white" letter-spacing="-2">PerformX</text>
+  <!-- Tagline -->
+  <text x="80" y="350" font-family="system-ui, sans-serif" font-size="24" font-weight="500" fill="rgba(255,255,255,0.45)" letter-spacing="4">PERFORMANCE THAT SCALES</text>
+  <!-- Description -->
+  <text x="80" y="420" font-family="system-ui, sans-serif" font-size="22" fill="rgba(255,255,255,0.35)">Performance Marketing &amp; Customer Acquisition Agency</text>
+  <!-- Acquisition system nodes -->
+  <g transform="translate(80, 480)">
+    <rect x="0" y="0" width="120" height="36" rx="10" fill="rgba(116,21,253,0.2)" stroke="rgba(116,21,253,0.5)" stroke-width="1"/>
+    <text x="60" y="23" font-family="system-ui" font-size="12" fill="white" text-anchor="middle">Creative</text>
+    <text x="132" y="23" font-family="system-ui" font-size="14" fill="rgba(255,255,255,0.2)">→</text>
+    <rect x="148" y="0" width="120" height="36" rx="10" fill="rgba(168,56,253,0.2)" stroke="rgba(168,56,253,0.5)" stroke-width="1"/>
+    <text x="208" y="23" font-family="system-ui" font-size="12" fill="white" text-anchor="middle">Paid Traffic</text>
+    <text x="280" y="23" font-family="system-ui" font-size="14" fill="rgba(255,255,255,0.2)">→</text>
+    <rect x="296" y="0" width="130" height="36" rx="10" fill="rgba(61,91,253,0.2)" stroke="rgba(61,91,253,0.5)" stroke-width="1"/>
+    <text x="361" y="23" font-family="system-ui" font-size="12" fill="white" text-anchor="middle">Landing Page</text>
+    <text x="438" y="23" font-family="system-ui" font-size="14" fill="rgba(255,255,255,0.2)">→</text>
+    <rect x="454" y="0" width="130" height="36" rx="10" fill="rgba(10,148,253,0.2)" stroke="rgba(10,148,253,0.5)" stroke-width="1"/>
+    <text x="519" y="23" font-family="system-ui" font-size="12" fill="white" text-anchor="middle">Conversion</text>
+    <text x="596" y="23" font-family="system-ui" font-size="14" fill="rgba(255,255,255,0.2)">→</text>
+    <rect x="612" y="0" width="120" height="36" rx="10" fill="rgba(10,148,253,0.15)" stroke="rgba(54,194,254,0.4)" stroke-width="1"/>
+    <text x="672" y="23" font-family="system-ui" font-size="12" fill="white" text-anchor="middle">CRM</text>
+    <text x="744" y="23" font-family="system-ui" font-size="14" fill="rgba(255,255,255,0.2)">→</text>
+    <rect x="760" y="0" width="120" height="36" rx="10" fill="rgba(54,194,254,0.2)" stroke="rgba(54,194,254,0.5)" stroke-width="1"/>
+    <text x="820" y="23" font-family="system-ui" font-size="12" fill="white" text-anchor="middle">Revenue</text>
+  </g>
+  <!-- Gradient bottom line -->
+  <rect x="0" y="626" width="1200" height="4" fill="url(#grad)"/>
+</svg>

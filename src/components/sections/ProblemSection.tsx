@@ -1,5 +1,6 @@
 import { AlertTriangle, TrendingDown, Eye, Layers } from "lucide-react";
 import { GradientText } from "@/components/ui/GradientText";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 const problems = [
   {
@@ -33,6 +34,7 @@ export function ProblemSection() {
     <section className="py-section" aria-labelledby="problem-heading">
       <div className="section-container">
         <div className="max-w-3xl mb-16">
+          <ScrollReveal>
           <p className="text-xs font-semibold text-brand-violet uppercase tracking-widest mb-4">
             Why campaigns fail
           </p>
@@ -45,9 +47,10 @@ export function ProblemSection() {
             tracking, and a retention system — is the most common reason brands plateau or go
             unprofitable. You're not buying growth, you're buying traffic.
           </p>
+          </ScrollReveal>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6" data-stagger="80">
           {problems.map((problem) => (
             <div
               key={problem.title}
