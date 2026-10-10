@@ -1,50 +1,60 @@
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { ArrowRight } from "lucide-react";
 
 export function FinalCTA() {
   return (
-    <section className="py-36 relative overflow-hidden" aria-labelledby="cta-heading">
-      <div className="absolute inset-0" style={{ background: "#010002" }} aria-hidden="true" />
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(116,21,253,0.12) 0%, transparent 70%)" }} aria-hidden="true" />
-      <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "60px 60px" }} aria-hidden="true" />
-      <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(116,21,253,0.4),rgba(54,194,254,0.4),transparent)" }} aria-hidden="true" />
+    <section className="relative overflow-hidden" aria-labelledby="cta-heading">
+      {/* Full-bleed gradient background */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#7415FD 0%,#A838FD 30%,#3D5BFD 60%,#0A94FD 80%,#36C2FE 100%)" }} aria-hidden="true" />
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-[#010002]/75" aria-hidden="true" />
+      {/* Grain on top */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
+      }} aria-hidden="true" />
+      {/* Grid */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize: "60px 60px" }} aria-hidden="true" />
 
-      <div className="section-container relative z-10">
-        <ScrollReveal className="max-w-4xl mx-auto text-center">
-          <p className="tag justify-center mb-8">Ready to scale?</p>
-          <h2 id="cta-heading" className="font-bold text-white mb-8 leading-[0.95] tracking-tight"
-            style={{ fontSize: "clamp(2.5rem,6vw,5rem)" }}>
-            Start with a free{" "}
-            <span className="bg-brand-gradient bg-clip-text text-transparent">Growth Audit.</span>
-          </h2>
-          <p className="text-lg text-white/40 leading-relaxed mb-14 max-w-2xl mx-auto">
-            Tell us about your business, your current ad spend, and your growth goals. We&apos;ll audit your acquisition system and tell you exactly where you&apos;re leaving money on the table — free, no obligation.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Link href="/free-growth-audit"
-              className="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-white font-bold text-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl"
-              style={{ background: "linear-gradient(135deg,#7415FD 0%,#A838FD 40%,#3D5BFD 80%)" }}>
-              Get Free Growth Audit
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-            </Link>
-            <Link href="/book-a-call"
-              className="inline-flex items-center gap-3 px-8 py-5 rounded-2xl text-white/70 font-semibold text-base border border-white/10 hover:border-white/25 hover:text-white hover:bg-white/5 transition-all duration-300">
-              <Phone size={17} aria-hidden="true" />
-              Book a Discovery Call
-            </Link>
+      <div className="section-container relative z-10 py-40">
+        <div className="max-w-5xl mx-auto">
+          {/* Giant text */}
+          <div data-gsap="fadeUp">
+            <p className="tag mb-10">Ready to scale?</p>
+            <h2 id="cta-heading" className="font-black text-white leading-[0.88] tracking-[-0.05em] mb-12"
+              style={{ fontSize: "clamp(3.5rem,10vw,9rem)" }}>
+              Start with a<br />free audit.
+            </h2>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-white/25">
-            {["No commitment required", "Delivered within 48 hours", "Actionable, specific recommendations"].map((t) => (
-              <span key={t} className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400" aria-hidden="true" />
+          {/* Sub + CTA side by side */}
+          <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-end" data-gsap="fadeUp" data-delay="0.15">
+            <p className="text-xl text-white/50 leading-relaxed max-w-xl">
+              Tell us about your business and your current ad spend. We&apos;ll audit your acquisition system and show you exactly where you&apos;re leaving money on the table — free, no obligation, delivered in 48 hours.
+            </p>
+            <div className="flex flex-col gap-3 shrink-0">
+              <Link href="/free-growth-audit"
+                className="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-[#010002] font-black text-lg transition-all duration-300 hover:scale-[1.04] whitespace-nowrap"
+                style={{ background: "#ffffff" }}>
+                Get Free Growth Audit
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+              </Link>
+              <Link href="/book-a-call"
+                className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-2xl text-white/70 font-semibold text-base border border-white/20 hover:border-white/50 hover:text-white transition-all duration-300 whitespace-nowrap">
+                Book a Discovery Call
+              </Link>
+            </div>
+          </div>
+
+          {/* Trust row */}
+          <div className="flex flex-wrap gap-8 mt-14 pt-10" style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }} data-gsap="fade" data-delay="0.3">
+            {["No commitment required", "Delivered within 48 hours", "Actionable, specific recommendations", "India · UAE · USA · UK"].map((t) => (
+              <span key={t} className="flex items-center gap-2 text-sm text-white/40">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/40" aria-hidden="true" />
                 {t}
               </span>
             ))}
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );

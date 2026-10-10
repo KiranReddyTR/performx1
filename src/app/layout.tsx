@@ -5,6 +5,9 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Analytics } from "@/components/Analytics";
 import { AnimationProvider } from "@/components/motion/AnimationProvider";
+import { GSAPProvider } from "@/components/motion/GSAPProvider";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { Grain } from "@/components/ui/Grain";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -76,6 +79,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-[#010002] text-white antialiased overflow-x-hidden" style={{ fontFamily: "var(--font-poppins), system-ui, sans-serif" }}>
         <Analytics />
+        <CustomCursor />
+        <Grain />
         {/* Skip to main */}
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium focus:text-white" style={{ background: "linear-gradient(135deg,#7415FD,#3D5BFD)" }}>
           Skip to main content
@@ -83,7 +88,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main-content" tabIndex={-1}>
           <AnimationProvider>
-            {children}
+            <GSAPProvider>
+              {children}
+            </GSAPProvider>
           </AnimationProvider>
         </main>
         <Footer />
