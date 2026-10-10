@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import { CheckCircle2, Clock, Zap } from "lucide-react";
 import { GrowthAuditForm } from "@/components/forms/GrowthAuditForm";
-import { CheckCircle2 } from "lucide-react";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Free Growth Audit — PerformX",
-  description:
-    "Get a free customer acquisition audit from PerformX. We'll analyse your paid media, conversion funnel, and tracking setup, then tell you exactly where you're leaving growth on the table.",
+  description: "Get a free customer acquisition audit. We review your paid media, conversion funnel, and tracking — then tell you exactly where you're leaving growth on the table.",
 };
 
 const included = [
@@ -18,46 +18,49 @@ const included = [
 
 export default function FreeGrowthAuditPage() {
   return (
-    <div className="min-h-screen pt-28 pb-24">
+    <div className="min-h-screen pt-32 pb-32">
       <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left — value prop */}
-          <div className="lg:sticky lg:top-32">
-            <p className="text-xs font-semibold text-brand-cyan uppercase tracking-widest mb-4">
-              Free, no obligation
-            </p>
-            <h1 className="text-display-lg font-bold text-white mb-6">
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
+          {/* Left */}
+          <ScrollReveal className="lg:sticky lg:top-32">
+            <p className="tag mb-8">Free, no obligation</p>
+            <h1 className="font-bold text-white mb-6 leading-tight tracking-tight" style={{ fontSize: "clamp(2.25rem,5vw,4rem)" }}>
               Get your free{" "}
-              <span className="bg-brand-gradient bg-clip-text text-transparent">
+              <span style={{ background: "linear-gradient(90deg,#7415FD,#A838FD,#36C2FE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 Growth Audit.
               </span>
             </h1>
-            <p className="text-lg text-white/50 leading-relaxed mb-8">
-              Tell us about your business and your current advertising setup. We'll audit your
-              acquisition system — paid media, conversion funnel, tracking — and deliver specific,
-              actionable recommendations at no cost.
+            <p className="text-lg text-white/40 leading-relaxed mb-10">
+              Tell us about your business and current advertising setup. We&apos;ll audit your acquisition system and deliver specific, actionable recommendations — at no cost.
             </p>
 
+            {/* Included */}
             <div className="space-y-3 mb-10">
               {included.map((item) => (
                 <div key={item} className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-brand-cyan mt-0.5 flex-shrink-0" aria-hidden="true" />
-                  <span className="text-sm text-white/70">{item}</span>
+                  <CheckCircle2 size={16} style={{ color: "#36C2FE" }} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
+                  <span className="text-sm text-white/60">{item}</span>
                 </div>
               ))}
             </div>
 
-            <div className="card-dark p-6">
-              <p className="text-sm text-white/40 mb-1 uppercase tracking-widest font-semibold text-xs">Delivered within</p>
-              <p className="text-3xl font-bold text-white mb-1">48 hours</p>
-              <p className="text-sm text-white/40">No fluff. No sales pitch. Just an honest assessment of where your acquisition system stands and where to improve it.</p>
+            {/* Stats cards */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 rounded-2xl" style={{ background: "#0C0C10", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <Clock size={18} style={{ color: "#7415FD" }} className="mb-3" aria-hidden="true" />
+                <div className="text-2xl font-bold text-white mb-1">48 hrs</div>
+                <p className="text-xs text-white/35">Delivered within</p>
+              </div>
+              <div className="p-5 rounded-2xl" style={{ background: "#0C0C10", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <Zap size={18} style={{ color: "#36C2FE" }} className="mb-3" aria-hidden="true" />
+                <div className="text-2xl font-bold text-white mb-1">Free</div>
+                <p className="text-xs text-white/35">No commitment</p>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
-          {/* Right — form */}
-          <div>
-            <GrowthAuditForm />
-          </div>
+          {/* Form */}
+          <GrowthAuditForm />
         </div>
       </div>
     </div>

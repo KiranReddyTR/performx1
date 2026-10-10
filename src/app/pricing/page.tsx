@@ -1,94 +1,100 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
-import { GradientText } from "@/components/ui/GradientText";
-import { Button } from "@/components/ui/Button";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export const metadata: Metadata = {
   title: "Pricing & Engagement Models — PerformX",
-  description: "PerformX offers flexible engagement models tailored to your growth stage. No fixed price lists — every engagement is scoped to your specific requirements.",
+  description: "Flexible engagement models for performance marketing. No fixed price lists — every acquisition system is scoped to your business.",
 };
 
 const models = [
   {
-    title: "Growth Audit",
+    title: "Free Growth Audit",
     price: "Free",
-    description: "A comprehensive review of your current acquisition setup — paid media, landing pages, tracking, and CRM. Delivered within 48 hours.",
-    features: ["Paid media account review", "Conversion funnel assessment", "Tracking gap analysis", "Top 3 growth recommendations", "No commitment required"],
+    desc: "A comprehensive review of your acquisition setup — paid media, landing pages, tracking, and CRM. Delivered within 48 hours.",
+    features: ["Paid media account review","Conversion funnel assessment","Tracking gap analysis","Top 3 growth recommendations","No commitment required"],
     cta: "Get Free Audit",
-    ctaHref: "/free-growth-audit",
+    href: "/free-growth-audit",
     highlight: false,
+    color: "#7415FD",
   },
   {
     title: "Full Acquisition System",
     price: "Custom",
-    description: "A complete customer acquisition system built for your business — from creative strategy through paid media, landing pages, tracking, CRM, and automation.",
-    features: ["Paid media management (Meta, Google, or both)", "Performance creative production", "Landing page build and CRO", "Tracking and attribution setup", "CRM and automation build", "Monthly reporting and strategy"],
+    desc: "A complete customer acquisition system built for your business — creative strategy, paid media, landing pages, tracking, CRM, and automation.",
+    features: ["Paid media management (Meta, Google, or both)","Performance creative production","Landing page build and CRO","Tracking and attribution setup","CRM and automation build","Monthly reporting and strategy"],
     cta: "Book a Discovery Call",
-    ctaHref: "/book-a-call",
+    href: "/book-a-call",
     highlight: true,
+    color: "#A838FD",
   },
   {
     title: "Paid Media Management",
     price: "Custom",
-    description: "Ongoing management of your paid media campaigns across Meta, Google, TikTok, or LinkedIn — with performance creative and conversion optimisation included.",
-    features: ["Campaign strategy and setup", "Performance creative testing", "Audience and bid management", "Weekly performance reviews", "Monthly strategy sessions"],
+    desc: "Ongoing management of your paid media campaigns with performance creative and conversion optimisation included.",
+    features: ["Campaign strategy and setup","Performance creative testing","Audience and bid management","Weekly performance reports","Monthly strategy sessions"],
     cta: "Get in Touch",
-    ctaHref: "/contact",
+    href: "/contact",
     highlight: false,
+    color: "#0A94FD",
   },
 ];
 
 export default function PricingPage() {
   return (
     <div className="min-h-screen">
-      <section className="pt-28 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-hero-radial opacity-40 pointer-events-none" aria-hidden="true" />
+      <section className="pt-32 pb-20 relative overflow-hidden">
+        <div className="absolute inset-0" style={{ background:"radial-gradient(ellipse 80% 50% at 50% -10%, rgba(116,21,253,0.16) 0%, transparent 70%)" }} aria-hidden="true" />
         <div className="section-container relative z-10">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold text-brand-cyan uppercase tracking-widest mb-4">Engagement models</p>
-            <h1 className="text-display-lg font-bold text-white mb-6">
+          <ScrollReveal className="max-w-3xl">
+            <p className="tag mb-8">Engagement models</p>
+            <h1 className="font-bold text-white mb-6 leading-tight tracking-tight" style={{ fontSize:"clamp(2.5rem,6vw,5rem)" }}>
               Flexible engagements,{" "}
-              <GradientText>built around your goals.</GradientText>
+              <span style={{ background:"linear-gradient(90deg,#7415FD,#A838FD,#36C2FE)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                built around your goals.
+              </span>
             </h1>
-            <p className="text-xl text-white/50 leading-relaxed mb-4">
-              We don't publish fixed pricing because every acquisition system is scoped to your business — your channels, your goals, your current setup.
-            </p>
-            <p className="text-base text-white/35">
-              What we can tell you: we work with businesses investing seriously in growth. If you're spending ₹50K+ per month on advertising — or ready to — get in touch.
-            </p>
-          </div>
+            <p className="text-lg text-white/40 leading-relaxed">We don&apos;t publish fixed pricing because every acquisition system is scoped to your business. What we can tell you: we work with businesses investing seriously in growth — typically ₹50K+ per month in advertising, or ready to.</p>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="py-section bg-[#0A0A0C]" aria-labelledby="models-heading">
+      <section className="pb-32">
         <div className="section-container">
-          <h2 id="models-heading" className="sr-only">Engagement models</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {models.map((model) => (
-              <div key={model.title} className={`rounded-2xl p-8 flex flex-col ${model.highlight ? "border-gradient bg-white/[0.03]" : "card-dark"}`}>
-                {model.highlight && (
-                  <span className="text-xs font-semibold text-brand-cyan uppercase tracking-widest mb-4">Most popular</span>
+          <div className="grid md:grid-cols-3 gap-5">
+            {models.map((m) => (
+              <div key={m.title} className="rounded-2xl p-8 flex flex-col"
+                style={{
+                  background: m.highlight ? `${m.color}08` : "#0C0C10",
+                  border: m.highlight ? `1px solid ${m.color}30` : "1px solid rgba(255,255,255,0.06)",
+                  boxShadow: m.highlight ? `0 0 60px ${m.color}10` : "none",
+                }}>
+                {m.highlight && (
+                  <span className="text-[10px] font-bold uppercase tracking-[0.15em] mb-4" style={{ color: m.color }}>Most popular</span>
                 )}
-                <h2 className="text-xl font-bold text-white mb-2">{model.title}</h2>
-                <div className="text-3xl font-bold bg-brand-gradient bg-clip-text text-transparent mb-4">{model.price}</div>
-                <p className="text-sm text-white/50 leading-relaxed mb-8">{model.description}</p>
+                <h2 className="text-xl font-bold text-white mb-2">{m.title}</h2>
+                <div className="text-4xl font-bold mb-4" style={{ background:`linear-gradient(90deg,${m.color},#36C2FE)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>{m.price}</div>
+                <p className="text-sm text-white/40 leading-relaxed mb-8">{m.desc}</p>
                 <ul className="space-y-3 mb-8 flex-1">
-                  {model.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-white/70">
-                      <CheckCircle2 size={15} className="text-brand-azure mt-0.5 flex-shrink-0" aria-hidden="true" />
-                      {f}
+                  {m.features.map(f=>(
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-white/60">
+                      <CheckCircle2 size={14} style={{ color:m.color }} className="mt-0.5 flex-shrink-0" aria-hidden="true" />{f}
                     </li>
                   ))}
                 </ul>
-                <Button variant={model.highlight ? "primary" : "secondary"} size="md" href={model.ctaHref} fullWidth>
-                  {model.cta}
-                </Button>
+                <Link href={m.href}
+                  className="flex items-center justify-center w-full py-3.5 rounded-xl font-bold text-sm text-white transition-all duration-200 hover:scale-[1.02]"
+                  style={{ background: m.highlight ? `linear-gradient(135deg,${m.color},#A838FD,#3D5BFD)` : "rgba(255,255,255,0.06)", border: m.highlight ? "none" : "1px solid rgba(255,255,255,0.10)" }}>
+                  {m.cta}
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
+
       <FinalCTA />
     </div>
   );
