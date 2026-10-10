@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, ShoppingBag, Building2, GraduationCap, HeartPulse, Car, MapPin, Gem } from "lucide-react";
-import { GradientText } from "@/components/ui/GradientText";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { industries } from "@/data/industries";
 
@@ -8,45 +7,48 @@ const iconMap: Record<string, React.ElementType> = {
   "shopping-bag": ShoppingBag, "building-2": Building2, "graduation-cap": GraduationCap,
   "heart-pulse": HeartPulse, car: Car, "map-pin": MapPin, gem: Gem,
 };
-
-const gradients = [
-  "from-[#7415FD]/20 to-[#A838FD]/10", "from-[#A838FD]/20 to-[#3D5BFD]/10",
-  "from-[#3D5BFD]/20 to-[#0A94FD]/10", "from-[#0A94FD]/20 to-[#36C2FE]/10",
-  "from-[#7415FD]/15 to-[#0A94FD]/10", "from-[#A838FD]/15 to-[#36C2FE]/10",
-  "from-[#3D5BFD]/15 to-[#7415FD]/10",
-];
+const colors = ["#7415FD","#A838FD","#3D5BFD","#0A94FD","#36C2FE","#7415FD","#A838FD"];
 
 export function IndustriesGrid() {
   return (
-    <section className="py-section" aria-labelledby="industries-heading">
+    <section className="py-32" style={{ background: "#08080C" }} aria-labelledby="industries-heading">
       <div className="section-container">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
-          <ScrollReveal className="max-w-2xl">
-            <p className="text-xs font-semibold text-brand-violet uppercase tracking-widest mb-4">Industries</p>
-            <h2 id="industries-heading" className="text-display-md font-bold text-white">
-              Deep expertise across <GradientText>20+ industries.</GradientText>
+        <ScrollReveal className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+          <div className="max-w-2xl">
+            <p className="tag mb-6">Industries</p>
+            <h2 id="industries-heading" className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+              Deep expertise across{" "}
+              <span style={{ background: "linear-gradient(90deg,#7415FD,#36C2FE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                20+ industries.
+              </span>
             </h2>
-          </ScrollReveal>
-          <Link href="/industries" className="flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors group whitespace-nowrap">
-            Explore all industries <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+          </div>
+          <Link href="/industries" className="flex items-center gap-2 text-sm font-semibold text-white/35 hover:text-white transition-colors group whitespace-nowrap">
+            Explore all <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
           </Link>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" data-stagger="60">
-          {industries.map((industry, i) => {
-            const Icon = iconMap[industry.icon] ?? ShoppingBag;
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" data-stagger="50">
+          {industries.map((ind, i) => {
+            const Icon = iconMap[ind.icon] ?? ShoppingBag;
+            const c = colors[i % colors.length];
             return (
-              <Link key={industry.id} href={`/industries/${industry.slug}`}
-                className="card-dark p-6 group hover:border-white/15 transition-all duration-300 hover:-translate-y-1 flex flex-col gap-4">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon size={22} className="text-white/80" aria-hidden="true" />
+              <Link key={ind.id} href={`/industries/${ind.slug}`}
+                className="group p-7 rounded-2xl flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1.5"
+                style={{ background: "#0C0C10", border: "1px solid rgba(255,255,255,0.06)" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = `${c}25`; (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 40px ${c}10`; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+              >
+                <div className="w-13 h-13 w-12 h-12 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: `${c}12`, border: `1.5px solid ${c}28` }}>
+                  <Icon size={22} style={{ color: c }} aria-hidden="true" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-sm font-semibold text-white mb-2">{industry.title}</h3>
-                  <p className="text-xs text-white/40 leading-relaxed line-clamp-2">{industry.description}</p>
+                  <h3 className="text-sm font-bold text-white mb-2">{ind.title}</h3>
+                  <p className="text-xs text-white/35 leading-relaxed line-clamp-2">{ind.description}</p>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-white/30 group-hover:text-brand-azure transition-colors mt-auto">
-                  Learn more <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+                <div className="flex items-center gap-1 text-xs font-medium text-white/25 group-hover:text-white/60 transition-colors">
+                  Explore <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
                 </div>
               </Link>
             );
