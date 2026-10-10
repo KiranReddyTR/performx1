@@ -7,8 +7,9 @@ interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "none";
+  direction?: "up" | "left" | "right" | "none";
   once?: boolean;
+  threshold?: number;
 }
 
 export function ScrollReveal({
@@ -17,6 +18,7 @@ export function ScrollReveal({
   delay = 0,
   direction = "up",
   once = true,
+  threshold = 0.12,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -27,35 +29,40 @@ export function ScrollReveal({
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
-    const translateMap = {
-      up: "translateY(32px)",
-      down: "translateY(-32px)",
-      left: "translateX(-32px)",
-      right: "translateX(32px)",
-      none: "none",
+    const transforms: Record<string, string> = {
+      up:    "translateY(40px)",
+      left:  "translateX(-30px)",
+      right: "translateX(30px)",
+      none:  "none",
     };
 
+    // Set initial state
     el.style.opacity = "0";
-    el.style.transform = translateMap[direction];
-    el.style.transition = `opacity 0.7s ease ${delay}ms, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms`;
+    if (direction !== "none") el.style.transform = transforms[direction];
+    el.style.transition = `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms`;
+    el.style.willChange = "opacity, transform";
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.style.opacity = "1";
-          el.style.transform = "none";
+          requestAnimationFrame(() => {
+            el.style.opacity = "1";
+            el.style.transform = "none";
+            // Clean up will-change after animation
+            setTimeout(() => { el.style.willChange = "auto"; }, 1000 + delay);
+          });
           if (once) observer.disconnect();
         } else if (!once) {
           el.style.opacity = "0";
-          el.style.transform = translateMap[direction];
+          el.style.transform = transforms[direction];
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold, rootMargin: "0px 0px -40px 0px" }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay, direction, once]);
+  }, [delay, direction, once, threshold]);
 
   return (
     <div ref={ref} className={className}>

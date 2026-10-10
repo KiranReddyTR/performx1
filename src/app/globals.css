@@ -90,22 +90,23 @@
     padding-inline: clamp(1.25rem, 5vw, 5rem);
   }
 
-  /* ── Tag / label ── */
+  /* ── Tag / eyebrow label ── */
   .tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.3);
   }
   .tag::before {
     content: '';
-    width: 20px;
+    display: inline-block;
+    width: 22px;
     height: 1.5px;
-    background: var(--grad);
+    background: linear-gradient(90deg, #7415FD, #36C2FE);
     border-radius: 1px;
     flex-shrink: 0;
   }
