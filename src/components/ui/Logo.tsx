@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -11,102 +9,63 @@ interface LogoProps {
 }
 
 export function Logo({ variant = "default", className, href = "/", size = "md" }: LogoProps) {
-  const sizes = {
-    sm: { width: 120, height: 32, iconSize: 28 },
-    md: { width: 152, height: 40, iconSize: 36 },
-    lg: { width: 192, height: 50, iconSize: 44 },
-  };
-  const { width, height, iconSize } = sizes[size];
+  const iconSizes = { sm: 28, md: 34, lg: 42 };
+  const textSizes = { sm: "text-lg", md: "text-xl", lg: "text-2xl" };
+  const iconSize = iconSizes[size];
 
   const logoContent = (
     <span className={cn("inline-flex items-center gap-2.5 select-none", className)}>
-      {/* PX Icon Mark */}
-      <svg
-        width={iconSize}
-        height={iconSize}
-        viewBox="0 0 40 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
+      {/* PX Geometric Icon */}
+      <svg width={iconSize} height={iconSize} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
-          <linearGradient id="px-gradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#7415FD" />
-            <stop offset="0.35" stopColor="#A838FD" />
-            <stop offset="0.65" stopColor="#3D5BFD" />
-            <stop offset="0.85" stopColor="#0A94FD" />
-            <stop offset="1" stopColor="#36C2FE" />
+          <linearGradient id="px-g" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#7415FD" />
+            <stop offset="40%" stopColor="#A838FD" />
+            <stop offset="70%" stopColor="#3D5BFD" />
+            <stop offset="100%" stopColor="#36C2FE" />
           </linearGradient>
         </defs>
         {/* P letterform */}
-        <path
-          d="M6 8h10a8 8 0 0 1 0 16H6V8z"
-          fill="none"
-          stroke="url(#px-gradient)"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <line x1="6" y1="24" x2="6" y2="34" stroke="url(#px-gradient)" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M5 6h10c4.4 0 8 3.6 8 8s-3.6 8-8 8H5V6z" stroke="url(#px-g)" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="5" y1="22" x2="5" y2="30" stroke="url(#px-g)" strokeWidth="2.2" strokeLinecap="round" />
         {/* X letterform */}
-        <line x1="24" y1="8" x2="36" y2="24" stroke="url(#px-gradient)" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="36" y1="8" x2="24" y2="24" stroke="url(#px-gradient)" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="22" y1="26" x2="28" y2="34" stroke="url(#px-gradient)" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="34" y1="26" x2="28" y2="34" stroke="url(#px-gradient)" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="20" y1="6" x2="31" y2="20" stroke="url(#px-g)" strokeWidth="2.2" strokeLinecap="round" />
+        <line x1="31" y1="6" x2="20" y2="20" stroke="url(#px-g)" strokeWidth="2.2" strokeLinecap="round" />
+        <line x1="18.5" y1="22" x2="24" y2="30" stroke="url(#px-g)" strokeWidth="2.2" strokeLinecap="round" />
+        <line x1="29.5" y1="22" x2="24" y2="30" stroke="url(#px-g)" strokeWidth="2.2" strokeLinecap="round" />
       </svg>
 
       {/* Wordmark */}
       {variant !== "icon-only" && (
-        <svg
-          width={size === "sm" ? 88 : size === "md" ? 110 : 138}
-          height={size === "sm" ? 20 : size === "md" ? 24 : 30}
-          viewBox="0 0 110 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-label="PerformX"
-        >
-          <defs>
-            <linearGradient id="text-gradient" x1="0" y1="0" x2="110" y2="0" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#7415FD" />
-              <stop offset="0.4" stopColor="#3D5BFD" />
-              <stop offset="0.7" stopColor="#0A94FD" />
-              <stop offset="1" stopColor="#36C2FE" />
-            </linearGradient>
-          </defs>
-          <text
-            x="0"
-            y="19"
-            fontFamily="'Poppins', system-ui, sans-serif"
-            fontWeight="600"
-            fontSize="20"
-            letterSpacing="-0.5"
-            fill={variant === "white" ? "#FFFFFF" : "url(#text-gradient)"}
+        <span className={cn("font-bold tracking-tight leading-none", textSizes[size])}>
+          <span
+            className="bg-clip-text text-transparent"
+            style={{
+              backgroundImage: variant === "white"
+                ? "none"
+                : "linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0.9) 60%, #A8B8FF 100%)",
+              color: variant === "white" ? "#FFFFFF" : undefined,
+            }}
           >
             Perform
-          </text>
-          <text
-            x="79"
-            y="19"
-            fontFamily="'Poppins', system-ui, sans-serif"
-            fontWeight="700"
-            fontSize="20"
-            letterSpacing="-0.5"
-            fill="url(#text-gradient)"
+          </span>
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "linear-gradient(135deg, #7415FD 0%, #36C2FE 100%)" }}
           >
             X
-          </text>
-        </svg>
+          </span>
+        </span>
       )}
     </span>
   );
 
   if (href) {
     return (
-      <Link href={href} className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-violet rounded-sm" aria-label="PerformX — Performance That Scales">
+      <Link href={href} className="inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-violet rounded-lg" aria-label="PerformX — Performance That Scales — Homepage">
         {logoContent}
       </Link>
     );
   }
-
   return logoContent;
 }

@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PerformX Website
+
+Performance marketing and customer acquisition agency website built with Next.js 14, TypeScript, and Tailwind CSS.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS with custom brand tokens
+- **Fonts**: Poppins (Google Fonts)
+- **Icons**: Lucide React
+- **Animations**: CSS transitions + Intersection Observer (prefers-reduced-motion compliant)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.local.example` to `.env.local` and configure:
 
-## Learn More
+```bash
+cp .env.local.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Purpose |
+|---|---|
+| `FORM_ENDPOINT_URL` | Webhook for form submissions (Make/Zapier/n8n) |
+| `NEXT_PUBLIC_GA4_ID` | Google Analytics 4 Measurement ID |
+| `NEXT_PUBLIC_BOOKING_URL` | Calendly / Cal.com booking URL |
+| `CRM_API_KEY` | HubSpot / Pipedrive / GoHighLevel API key |
+| `EMAIL_API_KEY` | Klaviyo / Mailchimp API key |
+| `NEXT_PUBLIC_WA_NUMBER` | WhatsApp Business number |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route | Page |
+|---|---|
+| `/` | Homepage (11 sections) |
+| `/about` | About PerformX |
+| `/why-performx` | Why PerformX |
+| `/who-we-work-with` | Ideal client profile |
+| `/process` | 9-stage growth framework |
+| `/services` | Services overview |
+| `/services/[slug]` | 12 individual service pages |
+| `/industries` | Industries overview |
+| `/industries/[slug]` | 7 individual industry pages |
+| `/case-studies` | Filterable case study index |
+| `/case-studies/[slug]` | 12 individual case study pages |
+| `/performance-creative` | Performance creative hub |
+| `/cro-landing-pages` | CRO & landing pages hub |
+| `/crm-automation` | CRM & automation hub |
+| `/resources` | Resources & blog |
+| `/pricing` | Engagement models |
+| `/careers` | Careers |
+| `/contact` | Contact |
+| `/free-growth-audit` | Primary CTA — Growth Audit form |
+| `/book-a-call` | Secondary CTA — booking |
+| `/thank-you` | Post-submission confirmation |
+| `/privacy-policy` | Privacy Policy |
+| `/terms-of-service` | Terms of Service |
 
-## Deploy on Vercel
+## API Routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Route | Purpose |
+|---|---|
+| `POST /api/growth-audit` | Growth Audit form submission |
+| `POST /api/contact` | Contact form submission |
+| `POST /api/newsletter` | Newsletter signup |
+| `GET /robots.txt` | robots.txt (allows GPTBot, ClaudeBot, PerplexityBot) |
+| `GET /sitemap.xml` | XML sitemap |
+| `GET /llms.txt` | AI/LLM discoverability file |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Brand Tokens
+
+```
+Gradient: #7415FD → #A838FD → #3D5BFD → #0A94FD → #36C2FE (left-to-right only)
+Black: #010002
+White: #FFFFFF
+Font: Poppins
+```
+
+## Pending Integrations
+
+- [ ] Form endpoint URL (webhook)
+- [ ] Booking calendar URL (Calendly/Cal.com)
+- [ ] CRM API credentials
+- [ ] Google Analytics 4 ID
+- [ ] Email service API key
+- [ ] WhatsApp Business API
+
+## Content Gaps
+
+- [ ] Logo SVG files (6 variants from brand guide)
+- [ ] Verified metrics for 6 remaining case studies
+- [ ] Team/founder bios (if approved for About page)
+- [ ] Office address
+- [ ] Full social media profile URLs
+- [ ] Partner/certification badges (if applicable)
